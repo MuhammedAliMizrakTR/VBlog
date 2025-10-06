@@ -47,7 +47,9 @@ RUN mkdir -p Data
 # ASP.NET Core uygulamasının dinleyeceği portu belirle
 # Render.com genellikle kendi dinamik portlarını atar ve PORT ortam değişkenini kullanır.
 # Bu, ASP.NET Core tarafından otomatik olarak algılanır.
-EXPOSE 8080 # Önerilen bir port, Render kendi portunu override edebilir
+EXPOSE 8080 
+# Yorum satırı bir sonraki satıra taşındı veya kaldırıldı.
+
 
 # Uygulamayı başlat
 # VBlog.dll, dotnet publish komutunun çıktısı olan ana DLL dosyasıdır.
