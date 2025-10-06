@@ -3,7 +3,7 @@
 # ====================================================================
 
 # .NET SDK imajını kullanarak uygulamayı derle
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Proje dosyalarını kopyala
@@ -31,7 +31,7 @@ RUN dotnet publish "VBlog.csproj" -c Release -o /app/publish --no-restore
 
 # Daha küçük ve daha güvenli olan .NET ASP.NET Runtime imajını kullan
 # Bu imaj sadece uygulamayı çalıştırmak için gereken minimum bileşenleri içerir.
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 
 # AŞAMA 1'den (build) derlenmiş uygulama çıktılarını kopyala
