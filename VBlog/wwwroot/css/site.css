@@ -1,0 +1,331 @@
+/* --- CSS Deðiþkenleri (Mevcut haliyle kalsýn) --- */
+:root {
+    --primary-bg: #fff;
+    --secondary-bg: #f8f9fa;
+    --text-color: #212529;
+    --heading-color: #343a40;
+    --border-color: #dee2e6;
+    --link-color: #0d6efd;
+    --link-hover-color: #0a58ca;
+    --card-bg: #fff;
+    --card-footer-bg: #f1f1f1;
+    --comment-border-color: #0d6efd;
+    --button-primary-bg: #0d6efd;
+    --button-primary-color: #fff;
+    --button-secondary-bg: #6c757d;
+    --button-secondary-color: #fff;
+    --button-warning-bg: #ffc107;
+    --button-warning-color: #212529;
+    --button-danger-bg: #dc3545;
+    --button-danger-color: #fff;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+}
+
+body.dark-theme {
+    --primary-bg: #212529;
+    --secondary-bg: #343a40;
+    --text-color: #e2e6ea;
+    --heading-color: #f8f9fa;
+    --border-color: #495057;
+    --link-color: #8ab4f8;
+    --link-hover-color: #a7c7fd;
+    --card-bg: #2d343c;
+    --card-footer-bg: #3c444d;
+    --comment-border-color: #8ab4f8;
+    --button-primary-bg: #8ab4f8;
+    --button-primary-color: #212529;
+    --button-secondary-bg: #6c757d;
+    --button-secondary-color: #fff;
+    --button-warning-bg: #ffd766;
+    --button-warning-color: #212529;
+    --button-danger-bg: #dc3545;
+    --button-danger-color: #fff;
+    --bs-light: #343a40;
+    --bs-dark: #f8f9fa;
+}
+
+
+/* --- Genel Stiller (Mevcut haliyle kalsýn, ancak footer stili eklenecek/güncellenecek) --- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+
+
+body {
+    /* Footer yüksekliðinden biraz daha fazla boþluk býrak */
+    /* Footer yüksekliði: 60px (içerik) + 2*8px (p-2'den gelen padding) = 76px. Güvenlik için 80px yapalým. */
+    margin-bottom: 80px; /* Güncellendi */
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- YENÝ EKLENEN/GÜNCELLENEN FOOTER STÝLÝ --- */
+.footer {
+    position: absolute; /* HTML'e göre konumlandýr */
+    bottom: 0; /* En alta hizala */
+    width: 100%; /* Tüm geniþliði kapla */
+    height: 76px; /* Footer içeriðinin yüksekliðini ve padding'ini karþýlayacak yükseklik */
+    line-height: 24px; /* Ýçeriði dikeyde ortalamaya yardýmcý olur, çok satýrlý metin için uygun olmayabilir */
+    padding: 1rem 0; /* d-flex align-items-center ile birleþince daha iyi olur */
+    background-color: var(--secondary-bg) !important; /* Tema rengini almasýný saðla */
+    color: var(--text-color) !important; /* Tema rengini almasýný saðla */
+    border-top: 1px solid var(--border-color) !important; /* Tema rengini almasýný saðla */
+    display: flex; /* Ýçeriði Flexbox ile hizalamak için */
+    align-items: center; /* Ýçeriði dikeyde ortala */
+    justify-content: center; /* Ýçeriði yatayda ortala */
+}
+
+    .footer .container {
+        height: 100%; /* Ýç konteynerin de tüm yüksekliði almasýný saðla */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+/* Navbar */
+.navbar {
+    background-color: var(--secondary-bg) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: var(--text-color) !important;
+}
+
+    .navbar-brand:hover, .navbar-nav .nav-link:hover {
+        color: var(--link-color) !important;
+    }
+
+/* Baþlýklar */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color);
+}
+
+/* Linkler */
+a {
+    color: var(--link-color);
+}
+
+    a:hover {
+        color: var(--link-hover-color);
+    }
+
+/* Kartlar (Gönderi kartlarý, yorum kartlarý) */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.card-header, .card-footer {
+    background-color: var(--card-footer-bg);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+/* Form Kontrolleri */
+.form-control, .form-select, .input-group-text {
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+    .form-control:focus, .form-select:focus {
+        background-color: var(--secondary-bg);
+        color: var(--text-color);
+        border-color: var(--link-color);
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+/* Input Group Text (ikonlarýn arka planý) */
+.input-group-text {
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+/* Tablolar */
+.table {
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+    .table thead th {
+        border-bottom-color: var(--border-color);
+    }
+
+    .table tbody tr {
+        background-color: var(--card-bg);
+    }
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--secondary-bg);
+}
+
+.table-bordered th, .table-bordered td {
+    border-color: var(--border-color);
+}
+
+/* Yorum Kenarlýðý */
+.comments-section .card {
+    border-left: 3px solid var(--comment-border-color);
+}
+
+/* Butonlar */
+.btn-primary {
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-color);
+    border-color: var(--button-primary-bg);
+}
+
+    .btn-primary:hover {
+        background-color: var(--link-hover-color);
+        border-color: var(--link-hover-color);
+    }
+
+.btn-secondary {
+    background-color: var(--button-secondary-bg);
+    color: var(--button-secondary-color);
+    border-color: var(--button-secondary-bg);
+}
+
+    .btn-secondary:hover {
+        background-color: darken(var(--button-secondary-bg), 10%);
+        border-color: darken(var(--button-secondary-bg), 10%);
+    }
+
+.btn-warning {
+    background-color: var(--button-warning-bg);
+    color: var(--button-warning-color);
+    border-color: var(--button-warning-bg);
+}
+
+    .btn-warning:hover {
+        background-color: darken(var(--button-warning-bg), 10%);
+        border-color: darken(var(--button-warning-bg), 10%);
+    }
+
+.btn-danger {
+    background-color: var(--button-danger-bg);
+    color: var(--button-danger-color);
+    border-color: var(--button-danger-bg);
+}
+
+    .btn-danger:hover {
+        background-color: darken(var(--button-danger-bg), 10%);
+        border-color: darken(var(--button-danger-bg), 10%);
+    }
+
+.btn-outline-danger {
+    color: var(--button-danger-bg);
+    border-color: var(--button-danger-bg);
+}
+
+    .btn-outline-danger:hover {
+        background-color: var(--button-danger-bg);
+        color: var(--button-danger-color);
+    }
+
+
+/* --- Diðer Ýyileþtirmeler (Mevcut haliyle kalsýn) --- */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.nav-item .nav-link i {
+    margin-right: 0.5rem;
+}
+
+.input-group-text {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.form-control-with-icon {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.card-footer {
+    font-size: 0.85em;
+}
+
+.table i {
+    margin-right: 0.3rem;
+}
+
+.alert {
+    margin-top: 1rem;
+    color: var(--text-color);
+}
+
+.alert-success {
+    background-color: var(--secondary-bg);
+    border-color: var(--comment-border-color);
+}
+
+.alert-danger {
+    background-color: var(--secondary-bg);
+    border-color: var(--button-danger-bg);
+}
+
+body.dark-theme .bg-white {
+    background-color: var(--secondary-bg) !important;
+}
+
+body.dark-theme .text-dark {
+    color: var(--text-color) !important;
+}
+
+body.dark-theme .text-muted {
+    color: #b0b8c2 !important;
+}
+
+/* Tema deðiþtirme düðmesi ikonu için stil */
+#theme-toggle i {
+    margin-right: 0 !important;
+}
+/* --- YENÝ EKLENECEK KISIM: List Group Stilleri --- */
+.list-group-item {
+    background-color: var(--card-bg); /* Kartlarla ayný arka plan rengini alsýn */
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.list-group-item-action:hover,
+.list-group-item-action:focus {
+    background-color: var(--secondary-bg); /* Hafifçe farklý bir arka plan */
+    color: var(--link-hover-color); /* Link rengine benzer */
+    border-color: var(--border-color); /* Kenarlýk rengini koru */
+}
+
+#theme-toggle i {
+    margin-right: 0 !important;
+}
+/* --- Mevcut CSS içeriði --- */
+/* ... (önceki site.css içeriði) ... */
+
+/* Resim Stilleri */
+.post-image, .comment-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    object-fit: contain;
+    max-height: 400px;
+}
+
+.post-thumbnail {
+    max-width: 200px;
+    height: auto;
+    border: 1px solid var(--border-color);
+    margin-bottom: 0.5rem;
+    object-fit: cover;
+}

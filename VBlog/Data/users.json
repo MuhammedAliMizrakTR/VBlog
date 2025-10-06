@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "cb9ad1f5-ef3a-4054-ae79-485cf012bc74",
+    "Username": "admin",
+    "Email": "admin@vblog.com",
+    "PasswordHash": "$2a$11$Yu4u4VM5bRCWRiYjBE/q.um/7a1safKzvLAX1haFcFHJW1oX4c5lS",
+    "Role": "Admin",
+    "RegisteredAt": "2025-10-06T16:45:57.5353555Z"
+  },
+  {
+    "Id": "9d06d44b-5000-4cda-8c69-e726604fee85",
+    "Username": "author",
+    "Email": "author@vblog.com",
+    "PasswordHash": "$2a$11$ovMV4kY3sW56gogOKowq5.xPSmQnalA3UtdbkTExH8WxaymkQfN5u",
+    "Role": "Author",
+    "RegisteredAt": "2025-10-06T16:45:57.7435816Z"
+  },
+  {
+    "Id": "2aa1bf93-bf1e-41d7-8eb0-fa942c863f73",
+    "Username": "Muhammed",
+    "Email": "m@m.com",
+    "PasswordHash": "$2a$11$k8r4Jz2xknyIvZbZiQnAD.PuBMmXH5zD6CRP6.COrmXeCGm1okg5W",
+    "Role": "User",
+    "RegisteredAt": "2025-10-06T18:01:23.7419136Z"
+  }
+]

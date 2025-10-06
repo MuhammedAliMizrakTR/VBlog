@@ -1,0 +1,97 @@
+﻿@model VBlog.Models.Post
+@using System.Security.Claims
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<h1><i class="fas fa-book-open"></i> @Model.Title</h1>
+
+<div class="mb-3">
+    <small class="text-muted"><i class="fas fa-user-edit"></i> Yazar: @Model.AuthorUsername - <i class="fas fa-calendar-alt"></i> Tarih: @Model.CreatedAt.ToShortDateString()</small>
+    @if (Model.LastModified.HasValue)
+    {
+        <small class="text-muted"> (<i class="fas fa-edit"></i> Son Düzenleme: @Model.LastModified.Value.ToShortDateString())</small>
+    }
+</div>
+
+@if (!string.IsNullOrEmpty(Model.ImagePath))
+{
+    <div class="mb-4">
+        <img src="@Model.ImagePath" alt="Gönderi Resmi" class="img-fluid rounded post-image" />
+    </div>
+}
+
+<div class="post-content mb-4">
+    @Html.Raw(Model.Content)
+</div>
+
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.AuthorId.ToString()))
+{
+    <div class="mb-4">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="fas fa-edit"></i> Düzenle</a>
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-inline" onsubmit="return confirm('Bu gönderiyi silmek istediğinizden emin misiniz?');" asp-antiforgery="true">
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Sil</button>
+        </form>
+    </div>
+}
+
+<hr />
+
+<h3><i class="fas fa-comments"></i> Yorumlar</h3>
+@if (Model.Comments != null && Model.Comments.Any())
+{
+    <div class="comments-section mb-4">
+        @foreach (var comment in Model.Comments.OrderBy(c => c.CreatedAt))
+        {
+            <div class="card mb-2">
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(comment.ImagePath))
+                    {
+                        <div class="mb-2">
+                            <img src="@comment.ImagePath" alt="Yorum Resmi" class="img-fluid rounded comment-image" />
+                        </div>
+                    }
+                    <p class="card-text">@comment.Content</p>
+                    <small class="text-muted"><i class="fas fa-comment"></i> Yorumlayan: @comment.AuthorUsername - <i class="fas fa-clock"></i> @comment.CreatedAt.ToShortDateString()</small>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <form asp-controller="Post" asp-action="DeleteComment" asp-route-postId="@Model.Id" asp-route-commentId="@comment.Id" method="post" class="d-inline float-end" onsubmit="return confirm('Bu yorumu silmek istediğinizden emin misiniz?');" asp-antiforgery="true">
+                            <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-times"></i> Sil</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p><i class="fas fa-info-circle"></i> Henüz bu gönderiye yorum yapılmamış.</p>
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="comment-form mt-4">
+        <h4><i class="fas fa-comment-dots"></i> Yorum Bırak</h4>
+        <form asp-controller="Post" asp-action="AddComment" asp-antiforgery="true" enctype="multipart/form-data"> @* enctype eklendi *@
+            <input type="hidden" asp-for="Id" name="PostId" />
+            <div class="form-group">
+                <label for="Content">Yorumunuz</label>
+                <textarea class="form-control" id="Content" name="Content" rows="3" required></textarea>
+            </div>
+            <div class="form-group mt-3">
+                <label for="ImageFile" class="control-label">Resim Yükle (Opsiyonel)</label> @* Yorum resim yükleme inputu *@
+                <input type="file" id="ImageFile" name="ImageFile" class="form-control" accept="image/*" />
+            </div>
+            <button type="submit" class="btn btn-primary mt-2"><i class="fas fa-paper-plane"></i> Yorum Yap</button>
+        </form>
+    </div>
+}
+else
+{
+    <p class="mt-4"><i class="fas fa-exclamation-circle"></i> Yorum yapmak için <a asp-controller="Account" asp-action="Login">giriş yapmanız</a> gerekmektedir.</p>
+}
+
+<div class="mt-3">
+    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Tüm Gönderilere Dön</a>
+</div>

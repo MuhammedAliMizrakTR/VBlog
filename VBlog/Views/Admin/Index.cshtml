@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Admin Paneli";
+}
+
+<h1><i class="fas fa-user-cog"></i> Admin Paneli</h1>
+
+<div class="list-group">
+    <a asp-action="ManageUsers" class="list-group-item list-group-item-action"><i class="fas fa-users"></i> Kullanıcıları Yönet</a>
+    <a asp-action="ManagePosts" class="list-group-item list-group-item-action"><i class="fas fa-file-alt"></i> Gönderileri Yönet</a>
+    <a asp-action="ManageComments" class="list-group-item list-group-item-action"><i class="fas fa-comments"></i> Yorumları Yönet</a>
+</div>

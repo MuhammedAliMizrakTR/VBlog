@@ -1,0 +1,52 @@
+﻿@model List<VBlog.Models.Post>
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div class="text-center">
+    <h1 class="display-4"><i class="fas fa-newspaper"></i> VBlog'a Hoş Geldiniz!</h1>
+    <p>Son blog gönderilerini keşfedin.</p>
+</div>
+
+<div class="row">
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var post in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(post.ImagePath))
+                    {
+                        @* YENİ EKLENDİ: Gönderi resmi burada gösterilecek *@
+                        <img src="@post.ImagePath" class="card-img-top post-card-image" alt="@post.Title" />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-heading"></i> @post.Title</h5>
+                        <p class="card-text">@((post.Content.Length > 150) ? post.Content.Substring(0, 150) + "..." : post.Content)</p>
+                        <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id" class="btn btn-primary btn-sm"><i class="fas fa-book-reader"></i> Devamını Oku</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <i class="fas fa-user-edit"></i> Yazar: @post.AuthorUsername <br />
+                        <i class="fas fa-calendar-alt"></i> Tarih: @post.CreatedAt.ToShortDateString()
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-12">
+            <p><i class="fas fa-info-circle"></i> Henüz yayınlanmış bir gönderi bulunmamaktadır.</p>
+        </div>
+    }
+</div>
+
+@* Ana sayfadaki resimler için yeni CSS kuralı ekleyelim *@
+<style>
+    .post-card-image {
+        max-height: 200px; /* Karttaki resmin maksimum yüksekliğini ayarla */
+        object-fit: cover; /* Resmin en boy oranını koruyarak kutuyu doldurur, taşan kısımları keser */
+        width: 100%; /* Kart genişliğine sığdır */
+        border-bottom: 1px solid var(--border-color); /* Alt kenarlık */
+    }
+</style>

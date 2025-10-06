@@ -1,0 +1,61 @@
+﻿@model VBlog.Models.PostViewModel
+@{
+    ViewData["Title"] = "Gönderiyi Düzenle";
+}
+
+<h1><i class="fas fa-edit"></i> Gönderiyi Düzenle</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" asp-route-id="@ViewContext.RouteData.Values["id"]" asp-antiforgery="true" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Title" class="control-label"></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-heading"></i></span>
+                    <input asp-for="Title" class="form-control form-control-with-icon" />
+                </div>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea asp-for="Content" class="form-control" rows="10"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <label class="control-label">Mevcut Resim</label>
+                @if (!string.IsNullOrEmpty(Model.ExistingImagePath))
+                {
+                    <div class="mb-2">
+                        <img src="@Model.ExistingImagePath" alt="Mevcut Resim" class="img-thumbnail post-thumbnail" />
+                        <div class="form-check mt-1">
+                            <input type="checkbox" asp-for="DeleteExistingImage" class="form-check-input" /> @* Model ile bağlandı *@
+                            <label class="form-check-label" asp-for="DeleteExistingImage">Mevcut resmi sil</label>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted"><i class="fas fa-info-circle"></i> Mevcut resim bulunmuyor.</p>
+                }
+
+                <label asp-for="ImageFile" class="control-label mt-3">Yeni Resim Yükle (Mevcut resmi değiştirecek veya ekleyecek)</label>
+                <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Kaydet</button>
+                <a asp-action="Details" asp-route-id="@ViewContext.RouteData.Values["id"]" class="btn btn-secondary"><i class="fas fa-times"></i> İptal</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
